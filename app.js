@@ -7,6 +7,7 @@ const path = require("path");
 const Listing = require("./models/listing.js");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync.js"); 
 
 
 app.set("view engine", "ejs");
@@ -48,11 +49,11 @@ app.get("/listings/:id", async (req, res) => {
 });
 
 // Create Route
-app.post("/listings", async (req, res) => {
+app.post("/listings", wrapAsync(async (req, res) => {
     let newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
-});
+}));
 
 // Edit Route
 app.get("/listings/:id/edit", async (req, res) => {
@@ -77,6 +78,10 @@ app.delete("/listings/:id", async (req, res) => {
 
 app.get("/", (req, res) => {
     res.send("Hi, I am root");
+});
+
+app.use((err, req, res, next) => {
+    res.send("Something want wrong!");
 });
 
 app.listen(port, () => {
