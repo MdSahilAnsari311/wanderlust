@@ -1,4 +1,3 @@
-// **Making Airbnb Type Clone** //
 const express = require("express");
 const app = express();
 const port = 8080;
