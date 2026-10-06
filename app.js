@@ -15,7 +15,7 @@ const reviews = require("./routes/review.js");
 const { readSync } = require("fs");
 
 app.use(cors({
-    origin: "*"
+    origin: "https://hoppscotch.io/"
 }));
 
 app.set("view engine", "ejs");
