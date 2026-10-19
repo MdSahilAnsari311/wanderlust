@@ -68,7 +68,13 @@ module.exports.renderEditForm = async (req, res) => {
 // Update Route
 module.exports.updateListing = async (req, res) => {
     let {id} = req.params;
-    let listing = await Listing.findByIdAndUpdate(id, {...req.body.listing},  {runValidators : true});
+
+    let response = await geocodingClient.forwardGeocode({
+        query: req.body.listing.location,
+        limit: 1
+    }).send(); 
+
+    let listing = await Listing.findByIdAndUpdate(id,  {...req.body.listing, geometry: response.body.features[0].geometry}, {runValidators : true});
     
     if(typeof req.file !== "undefined") {
         let url = req.file.path;

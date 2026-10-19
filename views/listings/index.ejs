@@ -65,9 +65,8 @@
             <div class="card-body">
                 <p class="card-text">
                     <b><%= listing.title %></b> <br/>
-                    &#x20B9;<%= listing.price.toLocaleString("en-IN")%> 
+                    &#x20B9;<span class="listing-price" data-price="<%= listing.price %>"><%= listing.price.toLocaleString("en-IN") %></span>
                     <span> / night </span>
-                    <i class="tax-info">&nbsp; +18% GST</i>
                 </p>
             </div>
         </div>
@@ -78,8 +77,17 @@
 <script>
     let taxSwitch = document.getElementById("flexSwitchCheckDefault");
     taxSwitch.addEventListener("click", () => {
+        let prices = document.getElementsByClassName("listing-price");
         let taxInfo = document.getElementsByClassName("tax-info");
-        for(info of taxInfo) {
+
+        for(let price of prices) {
+            let originalPrice = Number(price.dataset.price);
+            price.textContent = taxSwitch.checked
+            ? ` ${Math.round(originalPrice * 1.18).toLocaleString("en-IN")}`
+            : ` ${originalPrice.toLocaleString("en-IN")}`;
+        }
+
+        for(let info of taxInfo) {
             if(info.style.display != "inline") {
                 info.style.display = "inline";
             }else {
