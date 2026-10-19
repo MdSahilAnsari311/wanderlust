@@ -11,7 +11,8 @@ body {
 }
 
 .navbar {
-    height: 5rem;
+    min-height: 5rem;
+    height: auto;
     background-color: white;
 }
 
@@ -24,7 +25,31 @@ body {
     color: black !important;
 }
 
-.f-info-links a{
+/* Mobile responsive navbar */
+@media (max-width: 767.98px) {
+    .navbar {
+        height: auto;
+    }
+
+    .navbar-collapse {
+        flex-basis: 100%;
+        width: 100%;
+    }
+
+    .navbar-collapse .navbar-nav {
+        width: 100%;
+    }
+
+    .navbar-collapse .nav-link {
+        padding: 0.6rem 0;
+    }
+
+    .navbar-collapse .navbar-nav.ms-auto {
+        margin-left: 0 !important;
+    }
+}
+
+.f-info-links a {
     text-decoration: none;
     color: black;
     margin-right: 0.5rem;
@@ -34,7 +59,9 @@ body {
     text-decoration: underline;
 }
 
-.f-info-links, .f-info-socials, .f-info-brand  {
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
     width: 100%;
     display: flex;
     align-items: center;
@@ -56,6 +83,25 @@ body {
     align-items: space-evenly;
 }
 
+.search-btn {
+    background-color: #fe424d !important;
+    color: #fff !important;
+    border-radius: 1.5625rem !important;
+    padding: 0 1rem 0 1rem !important;
+}
+
+.search-btn i {
+    display: inline;
+    margin-right: 0.5rem;
+}
+
+.search-inp {
+    border-radius: 1.5625rem !important;
+    padding: 0.5rem 3rem 0.5rem 3rem !important;
+    font-size: 1rem in !important;
+}
+
+/* Cards */
 .listing-card {
     border : none !important;
     margin-bottom: 2rem;
@@ -120,4 +166,61 @@ body {
 #map { 
     height: 400px;
     width: 100vh; 
+}
+
+/* Filters */
+#filters {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.filter {
+    text-align: center;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter p {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
+.tax-toggle {
+    margin-left: auto;
+    white-space: nowrap;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 0.8rem;
+}
+
+/* Mobile layout */
+@media (max-width: 767.98px) {
+    #filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    .filter {
+        flex: 1 0 25%;
+        min-width: 0;
+    }
+
+    .tax-toggle {
+        flex: 0 0 100%;
+        margin-left: 0;
+        box-sizing: border-box;
+    }
+}
+
+.tax-info {
+   display: none; 
 }
