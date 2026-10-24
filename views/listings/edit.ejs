@@ -1,7 +1,9 @@
 <%- layout("/layouts/boilerplate") %>
 <div class="row mt-3">
-<div class="col-8 offset-2"></div>
-    <h3>Edit your listing</h3>
+<div class="col-12 col-md-8 offset-md-2">
+    <div class="listings-card">
+    <div class="cards-body">
+    <h3 class="form-title">Edit your listing</h3>
     <form method="POST" action="/listings/<%= listing._id%>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -61,6 +63,9 @@
         </select>
             <div class="invalid-feedback">Category should be valid</div>
         </div>
-        <button type="submit" class="btn btn-dark  edit-btn mt-3 mb-3">Edit</button>
+        <button type="submit" class="btn btn-dark  edit-btn mt-3">Edit</button>
     </form>
+</div>
+</div>
+</div>
 </div>

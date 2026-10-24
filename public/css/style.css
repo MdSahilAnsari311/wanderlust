@@ -142,7 +142,7 @@ body {
 }
 
 /* Edit Page */
-.edit-btn {
+.edits-btn {
     background-color: #fe424d !important;
     border: none !important;
 }
@@ -223,4 +223,143 @@ body {
 
 .tax-info {
    display: none; 
+}
+
+/* Login Page Card, Signup Page Card */
+
+.login-card, .singup-card {
+    max-width: 550px;
+    width: 90%;
+    margin: 50px auto !important;
+    border: 1px solid #e5e5e5 !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08) !important;
+    background-color: #fff !important;
+}
+
+.login-card .card-body, .singup-card .card-body {
+    padding: 35px !important;
+}
+
+.login-title, .signup-title {
+    text-align: center !important;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 10px !important;
+}
+
+.login-subtitle {
+    text-align: center !important;
+    color: #777 !important;
+    margin-bottom: 28px !important;
+}
+
+.login-card .form-label, .singup-card .form-label {
+    font-weight: 500 !important;
+}
+
+.login-card .form-control, .singup-card .form-control {
+    min-height: 45px !important;
+    border-radius: 8px !important;
+}
+
+.login-card .form-control:focus, .singup-card .form-control:focus {
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 0.15rem rgba(25, 135, 84, 0.15) !important;
+}
+
+.login-btn, .signup-btn {
+    display: block !important;
+    margin: 0 auto 1rem auto !important;
+    width: 50% !important;
+    min-height: 45px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+}
+
+@media (max-width: 576px) {
+    .login-card, .singup-card {
+        margin: 30px auto !important;
+    }
+
+    .login-card .card-body, .singup-card .card-body {
+        padding: 24px !important;
+    }
+
+    .login-title, .signup-title {
+        font-size: 1.7rem !important;
+    }
+}
+
+/* New And Edit Page Styling */
+.listings-card {
+    max-width: 650px;
+    width: 100%;
+    margin: 40px auto !important;
+    border: 1px solid #e5e5e5 !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08) !important;
+    background-color: #fff !important;
+}
+
+.listings-card .cards-body {
+    padding: 35px !important;
+}
+
+.form-title {
+    text-align: center !important;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 24px !important;
+}
+
+.listings-card .form-label {
+    font-weight: 500 !important;
+}
+
+.listings-card .form-control, .listings-card .form-select {
+    min-height: 45px !important;
+    border-radius: 8px !important;
+}
+
+.listings-card .form-control:focus, .listings-card .form-select:focus {
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 0.15rem rgba(25, 135, 84, 0.15) !important;
+}
+
+.listings-preview-img {
+    max-width: 180px !important;
+    height: auto !important;
+    border-radius: 8px !important;
+}
+
+.add-btn, .edit-btn {
+    display: block !important;
+    margin: 20px auto 0 auto !important;
+    width: 50% !important;
+    min-height: 45px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+@media (max-width: 576px) {
+    .listings-card {
+        margin: 20px auto !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .listings-card .cards-body {
+        padding: 15px !important;
+    }
+
+    .form-title {
+        font-size: 1.7rem !important;
+    }
+    
+    .add-btn, .edit-btn {
+        width: 100% !important;
+    }
 }
