@@ -1,46 +1,50 @@
 <%- layout("./layouts/boilerplate") %>
 <div id="filters" class="mb-4 mt-4">
-    <div class="filter">
+    <div class="filter" data-category="All">
+        <div><i class="fa-solid fa-list"></i></div>
+        <p>All Listings</p>
+    </div>
+    <div class="filter" data-category="Trending">
         <div><i class="fa-solid fa-fire"></i></div>
         <p>Trending</p>
     </div>
-    <div class="filter">
+    <div class="filter" data-category="Rooms">
         <div><i class="fa-solid fa-bed"></i></div>
         <p>Rooms</p>
     </div>
-    <div class="filter">
+    <div class="filter" data-category="Iconic cities">
         <div><i class="fa-duotone fa-solid fa-mountain-city"></i></div>
         <p>Iconic cities</p>
     </div>
-    <div class="filter">
+    <div class="filter" data-category="Mountains">
         <div><i class="fa-duotone fa-solid fa-mountain"></i></div>
         <p>Mountains</p>
     </div>
-    <div class="filter">
+    <div class="filter" data-category="Castles">
         <div><i class="fa-brands fa-fort-awesome"></i></div>
         <p>Castles</p>
     </div>
-    <div class="filter">
+    <div class="filter" data-category="Beaches">
         <div><i class="fa-solid fa-umbrella-beach"></i></div>
         <p>Beaches</p>
     </div>
-    <div class="filter">
+    <div class="filter" data-category="Arctic">
         <div><i class="fa-solid fa-igloo"></i></div>
         <p>Arctic</p>
     </div>
-    <div class="filter">
+    <div class="filter" data-category="Farms">
         <div><i class="fa-solid fa-cow"></i></div>
         <p>Farms</p>
     </div>
-    <div class="filter">
+    <div class="filter" data-category="Camping">
         <div><i class="fa-solid fa-campground"></i></div>
         <p>Camping</p>
     </div>
-    <div class="filter">
+    <div class="filter" data-category="Hotels">
         <div><i class="fa-solid fa-hotel"></i></div>
         <p>Hotels</p>
     </div>
-    <div class="filter">
+    <div class="filter" data-category="Boats">
         <div><i class="fa-solid fa-ship"></i></div>
         <p>Boats</p>
     </div>
@@ -75,6 +79,7 @@
 </div>
 
 <script>
+    // TAX SWITCH SYSTEM
     let taxSwitch = document.getElementById("flexSwitchCheckDefault");
     taxSwitch.addEventListener("click", () => {
         let prices = document.getElementsByClassName("listing-price");
@@ -95,4 +100,54 @@
             }
         }
     });
+
+    // ICON FILTER HANDLING SYSTEM
+    const filters = document.querySelectorAll('.filter');
+
+    filters.forEach(filter => {
+        filter.addEventListener('click', () => {
+            // Read the custom category attribute we stamped on the HTML div
+            const selectedCategory = filter.getAttribute('data-category');
+            
+            // If they click 'All' or if something broke, just reload the root listing page
+            if (!selectedCategory || selectedCategory === 'All') {
+                window.location.href = '/listings'; 
+            } else {
+                // Encode the string (handles spaces like 'Iconic cities') and reload the page with query params
+                window.location.href = `/listings?category=${encodeURIComponent(selectedCategory)}`;
+            }
+        });
+    });
+
+    // HIGHLIGHT ACTIVE FILTER ON LOAD
+    const currentUrlParams = new URLSearchParams(window.location.search);
+    const activeCategory = currentUrlParams.get('category');
+
+    if (activeCategory) {
+        filters.forEach(f => {
+            if (f.getAttribute('data-category') === activeCategory) {
+                // Keep the selected category opaque and give it a bottom underline
+                f.style.opacity = "1";
+                f.style.borderBottom = "2px solid #222"; 
+            }
+        });
+    } else {
+        // If there's no category query param, light up the 'All' button by default
+        filters.forEach(f => {
+            if (f.getAttribute('data-category') === 'All') {
+                f.style.opacity = "1";
+                f.style.borderBottom = "2px solid #222";
+            }
+        });
+    }
+
+    // Making Search bar functional
+    const currentParamsObj = new URLSearchParams(window.location.search);
+    const searchWord = currentParamsObj.get('q');
+    const navSearchInput = document.querySelector('.search-inp');
+
+    // If a search keyword exists in the URL, put it back inside the navbar search input box
+    if (searchWord && navSearchInput) {
+        navSearchInput.value = searchWord;
+    }
 </script>

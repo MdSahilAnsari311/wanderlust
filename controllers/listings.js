@@ -6,8 +6,28 @@ const geocodingClient = mbxGeocoding({ accessToken : mapToken });
 
 // Index Route
 module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("./listings/index.ejs", {allListings});
+    // Grab the category parameter from the URL if someone clicked a filter icon
+    const { category, q} = req.query; 
+    
+    let filter = {};
+    
+    // If a valid category exists and isn't 'All', update the Mongoose query object
+    // Note: The string must match our schema enum capitalization ("Trending", "Rooms", etc.)
+    if (category && category !== 'All') {
+        filter.category = category;
+    }
+
+    if (q) {
+        filter.$or = [
+            { title: { $regex: q, $options: 'i' } },    // Matches words inside title
+            { location: { $regex: q, $options: 'i' } }, // Matches words inside location (like Fiji)
+            { country: { $regex: q, $options: 'i' } }   // Matches words inside country
+        ];
+    }
+
+    // Pull filtered items from Atlas (or everything if filter is empty)
+    const allListings = await Listing.find(filter); 
+    res.render("./listings/index.ejs", { allListings });
 };
 
 // New Route
