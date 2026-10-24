@@ -19,7 +19,17 @@
         </div>
     </div>
 
-    
+    <% if(currUser && !listing.owner._id.equals(currUser._id)) { %>
+        <div class="col-6 offset-3 mt-3">
+            <form method="POST" action="/wishlist/<%= listing._id %>">
+                <button type="submit" class="btn btn-outline-danger">
+                    <i class="fa-regular fa-heart"></i>
+                    Add to Wishlist
+                </button>
+            </form>
+        </div>
+    <% } %>
+
     <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
         <div class="btns">
         <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark col-1 offset-3 edits-btn">Edit</a>

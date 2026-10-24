@@ -20,6 +20,7 @@ const User = require("./models/user.js");
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js")
+const wishlistRouter = require("./routes/wishlist.js");
 const { readSync } = require("fs");
 
 app.use(cors({
@@ -81,6 +82,7 @@ app.use((req, res, next) => {
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", userRouter);
+app.use("/wishlist", wishlistRouter);
 
 // Handling Random Route Request
 app.use((req, res) => {

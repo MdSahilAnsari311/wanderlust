@@ -1,0 +1,52 @@
+
+<%- layout("./layouts/boilerplate") %>
+
+<div class="container mt-4">
+    <h2 class="mb-4">My Wishlist ❤️</h2>
+
+    <% if (user.wishlist.length === 0) { %>
+        <div class="text-center mt-5">
+            <h4>Your wishlist is empty!</h4>
+            <p>Save your favorite stays here to find them easily later.</p>
+            <a href="/listings" class="btn btn-dark mt-2">
+                Explore Listings
+            </a>
+        </div>
+    <% } else { %>
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+            <% for (let listing of user.wishlist) { %>
+                <% if (listing) { %>
+                    <div class="col mb-4">
+                        <a href="/listings/<%= listing._id %>" class="listing-link">
+                            <div class="card listing-card">
+                                <img
+                                    src="<%= listing.image.url %>"
+                                    class="card-img-top"
+                                    alt="listing_image"
+                                    style="height: 20rem; object-fit: cover;"
+                                />
+
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <b><%= listing.title %></b><br>
+                                        &#x20B9;<%= listing.price.toLocaleString("en-IN") %>
+                                        <span>/ night</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <form action="/wishlist/<%= listing._id %>?_method=DELETE"
+                              method="POST"
+                              class="mt-2">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="fa-solid fa-heart-crack"></i>
+                                Remove from Wishlist
+                            </button>
+                        </form>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+    <% } %>
+</div>
