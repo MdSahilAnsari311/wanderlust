@@ -10,7 +10,6 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js"); 
-const cors = require("cors");
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
 const flash  = require("connect-flash");
@@ -22,11 +21,6 @@ const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js")
 const wishlistRouter = require("./routes/wishlist.js");
-const { readSync } = require("fs");
-
-app.use(cors({
-    origin: "https://hoppscotch.io/"
-}));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
@@ -35,7 +29,6 @@ app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
-
 
 const dbUrl = process.env.ATLASDB_URL;
 
